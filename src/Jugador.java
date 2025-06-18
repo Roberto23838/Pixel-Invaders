@@ -1,4 +1,4 @@
-package Desarrollo;
+
 
 public class Jugador {
 		public String nombre;
