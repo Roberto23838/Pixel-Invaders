@@ -1,6 +1,4 @@
-### Pixel Invader (Java - Consola)
-
-#### Descripción 
+#### Pixel Invader (Java - Consola)
 Este es un juego clásico tipo **Space Invaders** desarrollado en **Java puro** para ejecutarse en la consola. Controla tu nave, dispara a los enemigos y evita sus ataques.
 
 #### Características
