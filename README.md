@@ -1,7 +1,9 @@
 ## Pixel Invader
-Este es un juego hecho en la consola de Java.
 
-### Controles
-- Moverse a la derecha `→`
-- Moverse a la izquierda `←`
-- Atacar `espacio`
+### Descripción 
+Este es un juego clásico tipo Space Invaders desarrollado en Java puro para ejecutarse en la consola. Controla tu nave, dispara a los enemigos y evita sus ataques.
+
+### Control
+- Presiona `D` para moverte a la derecha.
+- Presiona `A` para moverte a la izquierda.
+- Presiona `espacio` para atacar.
