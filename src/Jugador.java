@@ -1,15 +1,20 @@
 
+//Representación de la nave del jugador
 
 public class Jugador {
     public String nombre;
     private int salud;
     private int ataque;
     private int puntaje;
+
+
+    //Constructor
+
     public Jugador(String nombre, int salud, int ataque, int puntaje) {
-        this.nombre=nombre;
-        this.salud=salud;
-        this.ataque=ataque;
-        this.puntaje=puntaje;
+        this.nombre = nombre;
+        this.salud = salud;
+        this.ataque = ataque;
+        this.puntaje = puntaje;
     }
     public String getNombre() {
         return nombre;
