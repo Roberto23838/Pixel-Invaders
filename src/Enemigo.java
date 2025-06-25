@@ -1,13 +1,16 @@
 
 public class Enemigo {
+	//Atributos
 	public String tipo;
 	private int salud;
 	private int ataque;
+	//Constructor
 	public Enemigo(String tipo, int salud, int ataque) {
 		this.tipo=tipo;
 		this.salud=salud;
 		this.ataque=ataque;
 	}
+	//Metodos
 	public String getTipo() {
 		return tipo;
 	}
