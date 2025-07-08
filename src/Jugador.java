@@ -18,7 +18,7 @@ public class Jugador {
 
     public void jugadorNombreBase(){
 
-        System.out.print("Jugador: " + nombre);
+        System.out.printf("Jugador: %-18s   Salud: %d", nombre, 3);
 
     }
 
