@@ -14,15 +14,13 @@ public class Enemigo {
 	public void Atacar(int ataque) {
 		
 	}
-	public void RecibirDaño(int daño) {
+	public void RecibirDaño(int cantidad) {
+		salud -= cantidad;
+        if (salud < 0) salud = 0;
 		
 	}
-	public boolean EstaVivo(int enemigo) {
-		boolean sivive=true;
-		if(salud!=1) {
-			return sivive=false;
-		} else {}
-		return sivive;
+	public boolean EstaMuerto() {
+		return salud <= 0;
 	}
 	public int MostrarEstado(int salud) {
 		if(getSalud()>0) {
