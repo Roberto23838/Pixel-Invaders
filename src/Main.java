@@ -1,6 +1,6 @@
 
-public class main {
-	public static void main(String[] args) {
+public class Main {
+	public static void Main(String[] args) {
 	    Combate combate = new Combate();
 	    combate.colocarJugador(9, 5);
 	    combate.colocarEnemigos(5);
