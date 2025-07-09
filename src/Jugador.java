@@ -1,10 +1,8 @@
-
 public class Jugador {
     private String nombre;
     private int salud;
     private int ataque;
     private int puntaje;
-
 
     public Jugador(int salud, int ataque, int puntaje) {
         this.salud = salud;
@@ -12,14 +10,8 @@ public class Jugador {
         this.puntaje = puntaje;
     }
 
-    public Jugador(String nombre){
+    public Jugador(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void jugadorNombreBase(){
-
-        System.out.printf("Jugador: %-18s   Salud: %d", nombre, 3);
-
     }
 
     public void atacar(Enemigo e) {
@@ -31,31 +23,28 @@ public class Jugador {
     }
 
     public void recibirDaño(int cantidad) {
-
+        salud -= cantidad;
+        if (salud < 0) salud = 0;
     }
 
     public void mejora(Mejora m) {
 
     }
 
-
-    //Setters & Getters
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-
     public String getNombre() {
         return nombre;
     }
 
-    public void setSalud(int salud) {
-        this.salud = salud;
-        if (this.salud < 0) this.salud = 0;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getSalud() {
         return salud;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = Math.max(salud, 0);
     }
 
     public int getAtaque() {
@@ -63,8 +52,7 @@ public class Jugador {
     }
 
     public void setAtaque(int ataque) {
-        this.ataque = ataque;
-        if (this.ataque < 0) this.ataque = 0;
+        this.ataque = Math.max(ataque, 0);
     }
 
     public int getPuntaje() {
@@ -72,8 +60,6 @@ public class Jugador {
     }
 
     public void setPuntaje(int puntaje) {
-        this.puntaje = puntaje;
-        if (this.puntaje < 0) this.puntaje = 0;
+        this.puntaje = Math.max(puntaje, 0);
     }
 }
-

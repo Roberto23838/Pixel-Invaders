@@ -8,7 +8,7 @@ public class Mejora {
         this.valor = valor;
     }
 
-    public void descripcion(){
+    public void descripcion() {
 
     }
 
