@@ -75,8 +75,6 @@ public class Juego {
             }
         }
 
-        combate.actualizarBalas();
-
     }
 
 }
