@@ -17,7 +17,7 @@ public class Juego {
         System.out.print("Ingrese el nombre del jugador: ");
         String nombre = scanner.nextLine().toUpperCase();
 
-        Jugador jugador = new Jugador(nombre + "#" + randomNumero);
+        Jugador jugador = new Jugador(nombre + randomNumero);
         jugador.setSalud(3);
         jugador.setAtaque(2);
         jugador.setPuntaje(0);
@@ -43,13 +43,10 @@ public class Juego {
 
             int[] posicion = combate.obtenerPosicionJugador();
 
-            if (posicion == null) {
-                System.out.println("Jugador no encontrado en el mapa.");
-                break;
-            }
 
             int x = posicion[0];
             int y = posicion[1];
+
             int nuevoX = x;
             int nuevoY = y;
 
@@ -74,7 +71,7 @@ public class Juego {
             if (combate.esCeldaValida(nuevoX, nuevoY) && combate.getContenido(nuevoX, nuevoY) == '.') {
                 combate.moverJugador(x, y, nuevoX, nuevoY);
             } else {
-                System.out.println("Movimiento no válido (pared u ocupado).");
+                System.out.println("Movimiento no válido.");
             }
         }
 

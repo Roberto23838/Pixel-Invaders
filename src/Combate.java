@@ -10,6 +10,7 @@ public class Combate {
     private List<Proyectil> proyectiles;
     private Jugador jugador;
 
+
     public Combate() {
         mapa = new char[filas][columnas];
         enemigos = new Enemigo[filas][columnas];
@@ -59,9 +60,7 @@ public class Combate {
     public void eliminarEnemigo(int x, int y) {
         enemigos[x][y] = null;
         mapa[x][y] = '.';
-        if (jugador != null) {
-            jugador.setPuntaje(jugador.getPuntaje() + 10);
-        }
+
     }
 
     public void dispararBala(int x, int y, int direccion) {
@@ -95,7 +94,6 @@ public class Combate {
                 System.out.println("¡Enemigo eliminado en (" + x + "," + y + ")!");
             } else if (celda == 'U') {
                 System.out.println("¡El jugador fue alcanzado!");
-                if (jugador != null) jugador.recibirDaño(1);
                 p.desactivar();
                 balasInactivas.add(p);
             } else {
