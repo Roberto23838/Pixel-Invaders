@@ -1,42 +1,66 @@
-
-
 public class Jugador {
-	//Atributos
-		public String nombre;
-		private int salud;
-		private int ataque;
-		private int puntaje;
-		//Constructor
-		public Jugador(String nombre, int salud, int ataque, int puntaje) {
-			this.nombre=nombre;
-			this.salud=salud;
-			this.ataque=ataque;
-			this.puntaje=puntaje;
-		}
-		//Metodos
-		public String getNombre() {
-			return nombre;
-		}
-		public void setSalud(String nombre) {
-			this.nombre = nombre;
-		}
-		public int getSalud() {
-			return salud;
-		}
-		public void setSalud(int salud) {
-			this.salud = salud;
-		}
-		public int getAtaque() {
-			return ataque;
-		}
-		public void setAtaque(int ataque) {
-			this.ataque = ataque;
-		}
-		public int getPuntaje() {
-			return puntaje;
-		}
-		public void setPuntaje(int puntaje) {
-			this.puntaje = puntaje;
-		}
-}
+    private String nombre;
+    private int salud;
+    private int ataque;
+    private int puntaje;
 
+    public Jugador(int salud, int ataque, int puntaje) {
+        this.salud = salud;
+        this.ataque = ataque;
+        this.puntaje = puntaje;
+    }
+
+    public Jugador(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void atacar(Enemigo e) {
+
+    }
+
+    public boolean estaVivo() {
+        return this.salud > 0;
+    }
+
+    public void recibirDaño(int cantidad) {
+        salud -= cantidad;
+        if (salud < 0) salud = 0;
+    }
+
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getSalud() {
+        return salud;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = Math.max(salud, 0);
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = Math.max(ataque, 0);
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public void aumentarPuntaje(int cantidad) {
+        this.puntaje += cantidad;
+    }
+    }
