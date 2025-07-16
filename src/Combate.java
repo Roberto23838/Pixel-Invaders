@@ -110,6 +110,16 @@ public class Combate {
 
     }
 
+    public void limpiarProyectilesDelMapa() {
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length; j++) {
+                if (mapa[i][j] == '|') {
+                    mapa[i][j] = '.';
+                }
+            }
+        }
+    }
+
     public int[] obtenerPosicionJugador() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {

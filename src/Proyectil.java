@@ -30,7 +30,7 @@ public class Proyectil {
     }
 
     public void mover() {
-        y += direcion;
+        x += direcion;
         if (y < 0 || y >= 10) {
             activo = false;
         }
