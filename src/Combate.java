@@ -6,7 +6,7 @@ public class Combate {
     private final char[][] mapa;
     private final Enemigo[][] enemigos;
     private final int filas = 10;
-    private final int columnas = 10;
+    private final int columnas = 11;
     private List<Proyectil> proyectiles;
     private Jugador jugador;
 
@@ -69,7 +69,7 @@ public class Combate {
         }
     }
 
-    public void actualizarBalas() {
+    public void actualizarYcolisionProyectil() {
         List<Proyectil> balasInactivas = new ArrayList<>();
 
         for (Proyectil p : proyectiles) {
@@ -132,12 +132,12 @@ public class Combate {
     }
 
     public void mostrarMapa() {
-        System.out.println("\n============================================================");
+        System.out.println("\n════════════════════════════════════════════════════════════");
         if (jugador != null) {
             System.out.printf("Jugador: %-15s Salud: %-2d Ataque: %-2d Puntaje: %-2d\n",
                     jugador.getNombre(), jugador.getSalud(), jugador.getAtaque(), jugador.getPuntaje());
         }
-        System.out.println("============================================================\n");
+        System.out.println("════════════════════════════════════════════════════════════\n");
 
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
