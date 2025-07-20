@@ -18,8 +18,7 @@ public class Menu {
             System.out.println("\n=======================================");
             System.out.println("1. Jugar");
             System.out.println("2. Salir");
-            System.out.println("3. Personalizar jugador");
-            System.out.println("4. Configuración de partida");
+            System.out.println("3. Configuración de partida");
             System.out.print("Seleccione una opción: ");
 
             String opcion = scanner.nextLine();
@@ -33,9 +32,6 @@ public class Menu {
                     repetir = false;
                     break;
                 case "3":
-                    personalizarJugador();
-                    break;
-                case "4":
                     configuracionPartida();
                     break;
                 default:
