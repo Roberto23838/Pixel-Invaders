@@ -188,19 +188,6 @@ public class Menu {
         }
     }
 
-    private void personalizarJugador() {
-        System.out.print("Nombre del jugador: ");
-        nombrePersonalizado = scanner.nextLine();
-
-        System.out.print("Salud inicial (número entero mayor a 0): ");
-        saludPersonalizada = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Ataque inicial (número entero mayor a 0): ");
-        ataquePersonalizada = Integer.parseInt(scanner.nextLine());
-
-        System.out.println("¡Jugador personalizado correctamente!");
-    }
-
     public void separacionTop() {
         for (int i = 0; i < 5; i++) {
             System.out.println();
