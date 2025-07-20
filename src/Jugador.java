@@ -27,10 +27,6 @@ public class Jugador {
         if (salud < 0) salud = 0;
     }
 
-    public void mejora(Mejora m) {
-
-    }
-
     public String getNombre() {
         return nombre;
     }

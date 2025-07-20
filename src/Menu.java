@@ -141,7 +141,7 @@ public class Menu {
             }
 
             combate.limpiarProyectilesDelMapa();
-            combate.actualizarBalas();
+
 
         }
 
