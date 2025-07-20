@@ -5,19 +5,27 @@ import java.util.ArrayList;
 public class Combate {
     private final char[][] mapa;
     private final Enemigo[][] enemigos;
-    private final int filas = 11;
-    private final int columnas = 11;
+    private int filas = 11;
+    private int columnas = 11;
     private List<Bala> balas;
     private Jugador jugador;
+    int[] posicion = obtenerPosicionJugador();
 
-    public Combate() {
-        mapa = new char[filas][columnas];
-        enemigos = new Enemigo[filas][columnas];
-        balas = new ArrayList<>();
+    public Combate(int filas, int columnas, int numEnemigos) {
+        this.filas = filas;
+        this.columnas = columnas;
+        this.mapa = new char[filas][columnas];
+        this.enemigos = new Enemigo[filas][columnas];
+        this.balas = new ArrayList<>();
+
         inicializarMapa();
+        colocarJugador(filas - 1, columnas / 2);
+        colocarEnemigos(numEnemigos);
+
+        this.posicion = obtenerPosicionJugador();
     }
 
-    private void inicializarMapa() {
+    public void inicializarMapa() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 mapa[i][j] = '.';
@@ -71,17 +79,26 @@ public class Combate {
     
 
     public int[] obtenerPosicionJugador() {
-        for (int i = 0; i < filas; i++) {
+        if (mapa == null) {
+            return null;
+        }
+
+        for (int i = filas - 1; i >= 0; i--) {
             for (int j = 0; j < columnas; j++) {
                 if (mapa[i][j] == 'Y') {
                     return new int[]{i, j};
                 }
             }
         }
-        return null;
+        return new int[]{filas - 1, columnas / 2};
     }
-
     public void mostrarMapa() {
+    	 System.out.println("\n════════════════════════════════════════════════════════════");
+         if (jugador != null) {
+             System.out.printf("Jugador: %-15s Salud: %-2d Ataque: %-2d Puntaje: %-2d\n",
+                     jugador.getNombre(), jugador.getSalud(), jugador.getAtaque(), jugador.getPuntaje());
+         }
+         System.out.println("════════════════════════════════════════════════════════════\n");
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 System.out.print(mapa[i][j] + " ");
@@ -179,7 +196,6 @@ public class Combate {
             if (contadorBalas[x][y] > 1 || temporal[x][y] == 'X') {
                 b.desactivar();
                 mapa[x][y] = '.';
-                System.out.println("¡Colisión de balas en (" + x + "," + y + ")!");
             }
         }
 
