@@ -4,89 +4,42 @@ import java.util.Scanner;
 public class Menu {
 
     Scanner scanner = new Scanner(System.in);
-    int cantidadEnemigos = 5;
-    private static String nombrePersonalizado = null;
-    private static int saludPersonalizada = -1;
-    private static int ataquePersonalizada = -1;
 
-    public void mostrarMenu() {
-        boolean repetir = true;
-
-        while (repetir) {
-            System.out.println("\n=======================================");
-            System.out.printf("%28s", "PIXEL INVADER");
-            System.out.println("\n=======================================");
-            System.out.println("1. Jugar");
-            System.out.println("2. Salir");
-            System.out.println("3. Configuración de partida");
-            System.out.print("Seleccione una opción: ");
-
-            String opcion = scanner.nextLine();
-
-            switch (opcion) {
-                case "1":
-                    iniciarPartida();
-                    break;
-                case "2":
-                    System.out.println("¡Gracias por jugar Pixel Invader!");
-                    repetir = false;
-                    break;
-                case "3":
-                    configuracionPartida();
-                    break;
-                default:
-                    System.out.println("Opción inválida. Intente de nuevo.");
-            }
-        }
-    }
+    int cantidadEnemigos = 8;
+    int vidaJugador = 3;
+    Combate combate = new Combate();
 
     public void configuracionPartida() {
         while (true) {
-            separacionTop();
-            lineaDecorativa();
-            System.out.printf("%28s", "PERSONALIZAR PARTIDA");
-            lineaDecorativa();
-            System.out.println("[1] TAMAÑO DEL MAPA");
-            System.out.println("[2] CANTIDAD DE ENEMIGOS");
-            System.out.println("[3] REGRESAR AL MENÚ PRINCIPAL");
-            lineaDecorativa();
-            System.out.print("\nElija una opción: ");
+            espaciado();
+            linea();
+            System.out.printf("%28s", "CONFIGURACIÓN DE PARTIDA");
+            linea();
+            System.out.println("  [1] Cantidad de enemigos");
+            System.out.println("  [2] Dificultad");
+            System.out.println("  [3] Vida inicial del jugador");
+            System.out.println("  [4] Volver al menú principal");
+            linea();
+            System.out.print("Eliga una opción (1-4): ");
 
             int subopcion = scanner.nextInt();
             scanner.nextLine();
 
             switch (subopcion) {
                 case 1:
-                    separacionTop();
-                    lineaDecorativa();
-                    System.out.printf("%26s", "TAMAÑO DEL MAPA");
-                    lineaDecorativa();
-                    System.out.println("Ingrese el ancho del mapa [min. 10]: ");
-                    System.out.println("Ingrese la altura del mapa [min. 10]: ");
-                    lineaDecorativa();
+                    cantidadEnemigosMapa();
                     break;
                 case 2:
-                    separacionTop();
-                    lineaDecorativa();
-                    System.out.printf("%26s", "CANTIDAD DE ENEMIGOS");
-                    lineaDecorativa();
-                    while (true) {
-                        System.out.print("\nINGRESE LA CANTIDAD DE ENEMIGOS [MIN. 5]: ");
-                        cantidadEnemigos = scanner.nextInt();
-                        lineaDecorativa();
-                        if (cantidadEnemigos >= 5 && cantidadEnemigos <= 10) {
-                            break;
-                        } else {
-                            System.out.println("¡ERROR AL INGRESAR LA CANTIDAD!");
-                            lineaDecorativa();
-                        }
-                    }
+                    dificultad();
                     break;
                 case 3:
-                    System.out.println("[Regresando al menú principal]\n");
+                    vida();
+                    break;
+                case 4:
+                    System.out.println("Regresando al menú principal");
                     return;
                 default:
-                    System.out.println("Opción no válida. Intente nuevamente.");
+                    System.out.println("¡Opción no válida!");
             }
         }
     }
@@ -99,32 +52,25 @@ public class Menu {
         System.out.print("INGRESE EL NOMBRE DEL JUGADOR: ");
         String nombre = scanner.nextLine().toUpperCase();
 
-        if (nombrePersonalizado != null && !nombrePersonalizado.isEmpty()) {
-            nombre = nombrePersonalizado.toUpperCase() + "#" + randomNumero;
-        } else {
-            nombre += "#" + randomNumero;
-        }
+        Jugador jugador = new Jugador(nombre + "#" + randomNumero);
+        jugador.setSalud(vidaJugador);
+        jugador.setAtaque(1);
 
-        Jugador jugador = new Jugador(nombre);
-        jugador.setSalud(saludPersonalizada > 0 ? saludPersonalizada : 3);
-        jugador.setAtaque(ataquePersonalizada > 0 ? ataquePersonalizada : 2);
+        int dificultadActual = combate.getProbabilidadEnemigo();
+        combate = new Combate();
+        combate.setProbabilidadEnemigo(dificultadActual);
 
-        int filas = 10;
-        int columnas = 10;
-        Combate combate = new Combate(filas, columnas, cantidadEnemigos);
         combate.setJugador(jugador);
-        combate.inicializarMapa();
-        combate.colocarJugador(9, 5);
+        combate.colocarJugador(9, 8);
         combate.colocarEnemigos(cantidadEnemigos);
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 999; i++) {
             combate.mostrarMapa();
+            System.out.print("Movimiento (WASD): ");
+            String entrada = scanner.nextLine().toLowerCase();
 
-            System.out.print("\nMOVIMIENTO: ");
-            String movimiento = scanner.nextLine().toLowerCase();
-
-            if (movimiento.equals("0")) {
-                System.out.println("[Saliendo del juego y regresando al menú principal]");
+            if (entrada.equals("0")) {
+                System.out.println("  Regresando al menú principal");
                 break;
             }
 
@@ -135,8 +81,9 @@ public class Menu {
             int nuevoY = y;
             boolean movimientoRealizado = false;
 
-            if (!movimiento.isEmpty()) {
-                char tecla = movimiento.charAt(0);
+            if (!entrada.isEmpty()) {
+                char tecla = entrada.charAt(0);
+
                 switch (tecla) {
                     case 'w':
                         nuevoX = x - 1;
@@ -149,46 +96,159 @@ public class Menu {
                     case 'a':
                         nuevoY = y - 1;
                         movimientoRealizado = true;
+                        if (combate.esCeldaValida(x, nuevoY)) {
+                            char contenido = combate.getContenido(x, nuevoY);
+                            if (contenido == 'ˇ') {
+                                jugador.setSalud(jugador.getSalud() - 1);
+                                System.out.println("¡Has recibido daño por bala enemiga! Salud restante: " + jugador.getSalud());
+                                combate.eliminarBalaEnPosicion(x, nuevoY);
+                                combate.moverJugador(x, y, x, nuevoY);
+                                movimientoRealizado = false;
+                            } else if (contenido == '.') {
+                                movimientoRealizado = true;
+                            } else {
+                                System.out.println("Movimiento no válido");
+                                movimientoRealizado = false;
+                            }
+                        }
                         break;
                     case 'd':
                         nuevoY = y + 1;
                         movimientoRealizado = true;
+                        if (combate.esCeldaValida(x, nuevoY)) {
+                            char contenido = combate.getContenido(x, nuevoY);
+                            if (contenido == 'ˇ') {
+                                jugador.setSalud(jugador.getSalud() - 1);
+                                System.out.println("¡Has recibido daño por bala enemiga! Salud restante: " + jugador.getSalud());
+                                combate.eliminarBalaEnPosicion(x, nuevoY);
+                                combate.moverJugador(x, y, x, nuevoY);
+                                movimientoRealizado = false;
+                            } else if (contenido == '.') {
+                                movimientoRealizado = true;
+                            } else {
+                                System.out.println("Movimiento no válido");
+                                movimientoRealizado = false;
+                            }
+                        }
                         break;
                     case ' ':
                         if (combate.esCeldaValida(x - 1, y) && combate.getContenido(x - 1, y) == '.') {
-                            combate.dispararBala(x - 1, y, -1);
+                            combate.dispararBala(x - 1, y, -1, true);
                         }
                         break;
                     default:
-                        System.out.println("Movimiento no válido.");
+                        System.out.println("  Movimiento no válido.");
                 }
 
                 if (movimientoRealizado) {
                     if (combate.esCeldaValida(nuevoX, nuevoY) && combate.getContenido(nuevoX, nuevoY) == '.') {
                         combate.moverJugador(x, y, nuevoX, nuevoY);
                     } else {
-                        System.out.println("Movimiento no válido.");
+                        System.out.println("  Movimiento no válido");
                     }
                 }
             }
 
-            combate.disparosEnemigosAutomaticos();
-            combate.actualizarYColisionarBalas();
-            if (jugador.getSalud() <= 0) {
-                System.out.println("\n¡HAS SIDO DERROTADO!");
-                System.out.println("Tu puntaje: " + jugador.getPuntaje());
-                System.out.println("Puntaje máximo: " + Juego.getPuntajeMaximo());
-                Juego.setPuntajeMaximo(jugador.getPuntaje());
+            combate.actualizarBalasYColisionarBalas();
+            combate.disparoEnemigosAleatorio();
+            combate.mostrarMapa();
+
+            if (!combate.enemigosVivosSiNo()) {
+                combate.mostrarMapa();
+                System.out.println("¡GANASTE!");
+                break;
+            }
+            if (vidaJugador <= 0){
+                combate.mostrarMapa();
+                System.out.println("Perdiste");
                 break;
             }
         }
     }
 
-    public void separacionTop() {
+    // Cantidad de enemigos
+    public void cantidadEnemigosMapa() {
+        while (true) {
+            espaciado();
+            linea();
+            System.out.printf("%26s", "CANTIDAD DE ENEMIGOS");
+            linea();
+            System.out.print("  Enemigos a generar (max. 17)");
+            linea();
+            cantidadEnemigos = scanner.nextInt();
+
+            if (cantidadEnemigos > 0 && cantidadEnemigos <= 17) {
+                System.out.println("    Se ha generado " + cantidadEnemigos + " enemigos");
+                break;
+            } else {
+                System.out.println("¡Error!");
+            }
+        }
+    }
+
+    // Dificultad del juego
+    public void dificultad() {
+        while (true) {
+            espaciado();
+            linea();
+            System.out.printf("%22s", "DIFICULTAD");
+            linea();
+            System.out.println(" [1] Fácil");
+            System.out.println(" [2] Medio");
+            System.out.println(" [3] Difícil");
+            linea();
+            System.out.print("Elige una opción: ");
+            int opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    combate.setProbabilidadEnemigo(8);
+                    System.out.println("\n     Dificultad: Fácil");
+                    return;
+                case 2:
+                    combate.setProbabilidadEnemigo(20);
+                    System.out.println("\n     Dificultad: Medio");
+                    return;
+                case 3:
+                    combate.setProbabilidadEnemigo(40);
+                    System.out.println("\n     Dificultad: Difícil");
+                    return;
+                default:
+                    System.out.println("\n  ¡Opción no válida!");
+            }
+        }
+    }
+
+    // Vida inicial del jugador
+    public void vida() {
+        while (true) {
+            espaciado();
+            linea();
+            System.out.printf("%24s", "VIDA DEL JUGADOR");
+            linea();
+            System.out.println("  Nota: 10 > Vida > 0");
+            linea();
+            System.out.print("Ingresa la vida: ");
+            vidaJugador = scanner.nextInt();
+            if (vidaJugador < 10 && vidaJugador >= 1){
+                System.out.println("\n       Se añadió vida: " + vidaJugador);
+                break;
+            } else {
+                System.out.println("\n       ¡Error!");
+            }
+        }
+    }
+
+    // Métodos extra
+    public void linea() {
+        System.out.println("\n═════════════════════════════════");
+    }
+
+    public void espaciado() {
         for (int i = 0; i < 5; i++) {
             System.out.println();
         }
     }
+}
 
     public void lineaDecorativa() {
         System.out.println("\n=======================================");
