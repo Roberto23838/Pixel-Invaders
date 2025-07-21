@@ -2,21 +2,22 @@ import java.util.Scanner;
 
 public class Juego {
 
-    private static int puntajeMaximo = 0;
-
     public static void main(String[] args) {
+        mostrarMenuInicio();
+    }
+
+    public static void mostrarMenuInicio() {
         Scanner scanner = new Scanner(System.in);
         Menu opciones = new Menu();
 
         while (true) {
-            System.out.println("\n=======================================");
+            System.out.println("\n═══════════════════════════════════════");
             System.out.printf("%26s", "PIXEL INVADER");
-            System.out.println("\n=======================================\n");
+            System.out.println("\n═══════════════════════════════════════\n");
             System.out.printf("%11s%26s", "JUGAR [1]", "PERSONALIZAR PARTIDA [2]");
-            System.out.printf("\n\n%26s", "SALIR [0]");
-            System.out.println("\n\n=======================================\n");
+            System.out.println("\n\n═══════════════════════════════════════");
 
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opción (1-2): ");
 
             if (!scanner.hasNextInt()) {
                 System.out.println("Entrada inválida. Intente nuevamente.");
@@ -34,22 +35,9 @@ public class Juego {
                 case 2:
                     opciones.configuracionPartida();
                     break;
-                case 0:
-                    System.out.println("Gracias por jugar. ¡Hasta luego!");
-                    return;
                 default:
                     System.out.println("OPCIÓN INVÁLIDA. INTÉNTELO DE NUEVO.");
             }
         }
-    }
-
-    public static void setPuntajeMaximo(int puntaje) {
-        if (puntaje > puntajeMaximo) {
-            puntajeMaximo = puntaje;
-        }
-    }
-
-    public static int getPuntajeMaximo() {
-        return puntajeMaximo;
     }
 }
