@@ -1,16 +1,21 @@
-
 public class Proyectil {
     private int daño = 1;
     private boolean activo;
     private int x;
     private int y;
-    private int direcion;
+    private int direccion;
+    private boolean esDeJugador;
 
-    public Proyectil(int x, int y, int direcion) {
+    public Proyectil(int x, int y, int direccion, boolean esDeJugador) {
         this.x = x;
         this.y = y;
         this.activo = true;
-        this.direcion = direcion;
+        this.direccion = direccion;
+        this.esDeJugador = esDeJugador;
+    }
+
+    public boolean esDeJugador(){
+        return esDeJugador;
     }
 
     public int getX() {
@@ -30,8 +35,8 @@ public class Proyectil {
     }
 
     public void mover() {
-        x += direcion;
-        if (y < 0 || y >= 10) {
+        x += direccion;
+        if (x < 0 || x >= 10) {
             activo = false;
         }
     }
