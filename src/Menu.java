@@ -64,7 +64,7 @@ public class Menu {
         combate.colocarJugador(9, 8);
         combate.colocarEnemigos(cantidadEnemigos);
 
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 300; i++) {
             combate.mostrarMapa();
             System.out.print("Movimiento (WASD): ");
             String entrada = scanner.nextLine().toLowerCase();
